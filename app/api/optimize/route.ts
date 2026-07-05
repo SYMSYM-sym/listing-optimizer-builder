@@ -7,6 +7,7 @@ import type { OptimizeProgress } from "@/lib/engine/optimize";
 import type { KnowledgePackId, ListingSnapshot } from "@/lib/types";
 
 export const runtime = "nodejs";
+export const maxDuration = 300;
 
 type OptimizeRequestBody = {
   snapshot?: ListingSnapshot;

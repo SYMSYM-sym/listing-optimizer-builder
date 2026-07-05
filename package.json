@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "check:client-secrets": "node scripts/check-no-secrets-in-client-bundle.mjs",
+    "ci": "npm run build && npm run check:client-secrets && npm test"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
