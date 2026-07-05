@@ -1,0 +1,24 @@
+---
+description: Live Vercel only — no local runtime, crawls, or scrapes on this machine
+alwaysApply: true
+---
+
+# Live site only — do nothing locally
+
+All runtime work happens on the **deployed Vercel app** (https://listing-optimizer-builder.vercel.app). This machine is for **edit → commit → push** only.
+
+## Never do locally
+
+- `npm run dev` or any local server to test ingest/optimize
+- Crawls, scrapes, or live fetches (Firecrawl, Rainforest, Amazon PDPs)
+- curl/scripts against `localhost` for real ASINs or URLs
+- Writing API keys into tracked repo files (use Vercel env vars + gitignored `.env.local` if the user sets keys themselves)
+
+## Do instead
+
+1. **Commit and push** — Vercel deploys from GitHub automatically.
+2. **Live smoke tests** — hit `https://listing-optimizer-builder.vercel.app` API routes or UI only when testing real behavior.
+3. **Deterministic tests** — mocked fixtures in CI on GitHub (not on this computer); no live crawls in CI either unless explicitly against production with user approval.
+4. **Secrets** — set in Vercel project environment variables, never committed.
+
+When the user wants to test ingestion or optimization, direct them to the live dashboard or run checks against the production URL only.
