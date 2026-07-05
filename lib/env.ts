@@ -60,3 +60,39 @@ export function getEnv(): AppEnv {
 
   return env;
 }
+
+export type IngestEnv = {
+  ingestProvider: IngestProvider;
+  rainforestApiKey?: string;
+  firecrawlApiKey?: string;
+};
+
+/** Runtime env for ingestion routes — does not require Anthropic keys. */
+export function getIngestEnv(): IngestEnv {
+  const ingestProvider = (process.env.INGEST_PROVIDER?.trim() ||
+    "rainforest") as IngestProvider;
+
+  if (!["rainforest", "firecrawl", "paste"].includes(ingestProvider)) {
+    throw new Error(
+      `Invalid INGEST_PROVIDER "${ingestProvider}" — use rainforest, firecrawl, or paste`,
+    );
+  }
+
+  const env: IngestEnv = { ingestProvider };
+
+  if (ingestProvider === "rainforest") {
+    env.rainforestApiKey = requireString(
+      "RAINFOREST_API_KEY",
+      process.env.RAINFOREST_API_KEY,
+    );
+  }
+
+  if (ingestProvider === "firecrawl") {
+    env.firecrawlApiKey = requireString(
+      "FIRECRAWL_API_KEY",
+      process.env.FIRECRAWL_API_KEY,
+    );
+  }
+
+  return env;
+}
