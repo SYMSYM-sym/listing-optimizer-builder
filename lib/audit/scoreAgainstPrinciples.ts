@@ -199,8 +199,8 @@ function scoreP15(): PrincipleScore {
 function scoreP16(): PrincipleScore {
   return {
     id: "P16",
-    level: "full",
-    rationale: "Audit module verifies proposed output independently from generation.",
+    level: "partial",
+    rationale: "Worker≠checker is enforced by the audit pipeline, not visible in a static snapshot.",
   };
 }
 

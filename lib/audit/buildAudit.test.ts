@@ -48,6 +48,15 @@ describe("buildDiffGaps", () => {
     expect(gaps.some((gap) => gap.field.startsWith("attributes."))).toBe(true);
   });
 
+  it("marks bullet-count violations on the current listing as P0", () => {
+    const pack = loadPack("supplements");
+    const proposed = buildCleanListing(pack);
+    const gaps = buildDiffGaps(weakSnapshot, proposed, pack, "probiotic");
+    expect(gaps.filter((gap) => gap.field.startsWith("bullet")).some((gap) => gap.severity === "P0")).toBe(
+      true,
+    );
+  });
+
   it("marks compliance issues in the current listing as P0", () => {
     const pack = loadPack("supplements");
     const proposed = buildCleanListing(pack);

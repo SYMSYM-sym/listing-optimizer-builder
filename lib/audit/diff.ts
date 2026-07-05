@@ -116,12 +116,14 @@ function currentLimitFailures(
 }
 
 function failuresForField(field: string, failures: Failure[]): Failure[] {
-  return failures.filter(
-    (failure) =>
-      failure.field === field ||
-      field.startsWith(`${failure.field}.`) ||
-      failure.field.startsWith(`${field}.`),
-  );
+  return failures.filter((failure) => {
+    if (failure.field === field) return true;
+    if (field.startsWith(`${failure.field}.`)) return true;
+    if (failure.field.startsWith(`${field}.`)) return true;
+    if (failure.field === "bullets" && field.startsWith("bullet")) return true;
+    if (failure.field === "attributes" && field.startsWith("attributes.")) return true;
+    return false;
+  });
 }
 
 function classifySeverity(
