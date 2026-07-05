@@ -17,6 +17,7 @@ type ComplianceSource = {
   allergenRules: CompliancePack["allergenRules"];
   superlativeBans: string[];
   fictionPhrases: string[];
+  imageRoles?: string[];
 };
 
 const rules = rulesJson as Record<string, unknown>;
@@ -32,8 +33,21 @@ function buildSupplementsCompliance(): CompliancePack {
     allergenRules: complianceSource.allergenRules,
     superlativeBans: complianceSource.superlativeBans,
     fictionPhrases: complianceSource.fictionPhrases,
+    imageRoles: complianceSource.imageRoles ?? [],
   };
 }
+
+const GENERIC_IMAGE_ROLES = (
+  (rules.imagePlanRolesGeneric as { value: string[] } | undefined)?.value ?? [
+    "main",
+    "value-prop",
+    "facts-panel",
+    "feature-story",
+    "how-to",
+    "trust",
+    "lifestyle",
+  ]
+);
 
 const EMPTY_GENERIC_COMPLIANCE: CompliancePack = {
   canonicalDisclaimer: "",
@@ -42,6 +56,7 @@ const EMPTY_GENERIC_COMPLIANCE: CompliancePack = {
   allergenRules: [],
   superlativeBans: [],
   fictionPhrases: [],
+  imageRoles: GENERIC_IMAGE_ROLES,
 };
 
 /** Assemble a KnowledgePack from compiled JSON in knowledge/. */

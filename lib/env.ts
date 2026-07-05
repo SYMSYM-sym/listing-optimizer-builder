@@ -96,3 +96,20 @@ export function getIngestEnv(): IngestEnv {
 
   return env;
 }
+
+export type OptimizeEnv = {
+  anthropicApiKey: string;
+  anthropicModel: string;
+};
+
+/** Runtime env for optimization routes — Anthropic only, no ingest keys required. */
+export function getOptimizeEnv(): OptimizeEnv {
+  return {
+    anthropicApiKey: requireString(
+      "ANTHROPIC_API_KEY",
+      process.env.ANTHROPIC_API_KEY,
+    ),
+    anthropicModel:
+      process.env.ANTHROPIC_MODEL?.trim() || "claude-sonnet-4-6",
+  };
+}

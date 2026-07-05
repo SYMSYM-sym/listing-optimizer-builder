@@ -31,5 +31,9 @@
   "aplusBannerWidthPx": { "value": 1464, "timeSensitive": false },
   "aplusBannerHeightPx": { "value": 600, "timeSensitive": false },
   "aplusBannerMaxBytes": { "value": 2097152, "timeSensitive": false },
-  "qaSeedTargetCount": { "value": 15, "timeSensitive": true }
+  "qaSeedTargetCount": { "value": 15, "timeSensitive": true },
+  "imagePlanRolesGeneric": {
+    "value": ["main", "value-prop", "facts-panel", "feature-story", "how-to", "trust", "lifestyle"],
+    "timeSensitive": false
+  }
 }

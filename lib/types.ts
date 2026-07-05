@@ -28,6 +28,8 @@ export type CompliancePack = {
   allergenRules: AllergenRule[];
   superlativeBans: string[];
   fictionPhrases: string[];
+  /** Category-specific image slot roles (from pack, not engine). */
+  imageRoles: string[];
 };
 
 export type AllergenRule = {

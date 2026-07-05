@@ -151,5 +151,14 @@
     "clinically proven",
     "fda approved"
   ],
-  "fictionPhrases": []
+  "fictionPhrases": [],
+  "imageRoles": [
+    "main",
+    "value-prop",
+    "supplement-facts",
+    "ingredient-story",
+    "how-to",
+    "trust",
+    "lifestyle"
+  ]
 }

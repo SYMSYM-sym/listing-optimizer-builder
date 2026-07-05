@@ -9,6 +9,7 @@ describe("loadPack", () => {
     expect(pack.principles).toHaveLength(16);
     expect(pack.attributeSchema.length).toBeGreaterThan(30);
     expect(pack.compliancePack.diseaseVerbs).toContain("treat");
+    expect(pack.compliancePack.imageRoles.length).toBeGreaterThan(0);
     expect(pack.compliancePack.superlativeBans).toContain("#1");
     expect(pack.compliancePack.canonicalDisclaimer).toContain(
       "Food and Drug Administration",
@@ -30,5 +31,6 @@ describe("loadPack", () => {
     expect(pack.attributeSchema).toEqual([]);
     expect(pack.compliancePack.diseaseVerbs).toEqual([]);
     expect(pack.compliancePack.diseaseNounsBySubcategory).toEqual({});
+    expect(pack.compliancePack.imageRoles).toContain("facts-panel");
   });
 });
