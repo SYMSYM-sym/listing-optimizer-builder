@@ -23,8 +23,10 @@ export type ListingSnapshot = {
 /** Category-specific rules, compliance, attribute schema, and principles. */
 export type CompliancePack = {
   canonicalDisclaimer: string;
+  diseaseVerbs: string[];
   diseaseNounsBySubcategory: Record<string, string[]>;
   allergenRules: AllergenRule[];
+  superlativeBans: string[];
   fictionPhrases: string[];
 };
 
@@ -43,12 +45,25 @@ export type AttributeField = {
   example: string;
 };
 
-export type KnowledgePack = {
+export type Principle = {
   id: string;
+  text: string;
+  weight: number;
+};
+
+export type KnowledgePackId = "supplements" | "generic";
+
+export type KnowledgePack = {
+  id: KnowledgePackId;
   rules: Record<string, unknown>;
   compliancePack: CompliancePack;
   attributeSchema: AttributeField[];
-  principles: string[];
+  principles: Principle[];
+};
+
+export type CategoryDetection = {
+  packId: KnowledgePackId;
+  subcategory: string;
 };
 
 /**

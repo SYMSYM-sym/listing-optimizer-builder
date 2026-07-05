@@ -1,0 +1,18 @@
+[
+  { "id": "P01", "text": "Front-load the primary keyword — category-defining term in the first ~75 chars of the title.", "weight": 1.0 },
+  { "id": "P02", "text": "One term, one place — indexing counts a keyword once; don't repeat indexed words.", "weight": 1.0 },
+  { "id": "P03", "text": "Backend = pure discovery reserve — synonyms, misspellings, other-language variants not in visible copy.", "weight": 0.9 },
+  { "id": "P04", "text": "Fill every attribute field — blank structured fields = lost filters + COSMO retrieval uncertainty.", "weight": 1.0 },
+  { "id": "P05", "text": "Map to the tightest valid browse node — verify acceptance in Product Classifier.", "weight": 0.8 },
+  { "id": "P06", "text": "Cover the full query surface — head terms, long-tail, use-case phrases, misspellings without duplication.", "weight": 1.0 },
+  { "id": "P07", "text": "Write for situations, not just keywords — lead content with the buyer situation.", "weight": 1.0 },
+  { "id": "P08", "text": "One situational anchor per major use-case — a distinct, quotable line per core scenario.", "weight": 0.9 },
+  { "id": "P09", "text": "Use comparative framing — state what the product is for vs. alternatives and who it's best for.", "weight": 0.9 },
+  { "id": "P10", "text": "Keep A+ modules as real text — comparison, who-it's-for, FAQ must be extractable text.", "weight": 1.0 },
+  { "id": "P11", "text": "Mirror compliant buyer/review language — align copy with real review phrasing.", "weight": 0.7 },
+  { "id": "P12", "text": "Seed accurate structured Q&A — mirror the same facts in bullets and A+ FAQ.", "weight": 0.9 },
+  { "id": "P13", "text": "Substantiated trust > forbidden social proof — no star/review claims; use documentable signals.", "weight": 1.0 },
+  { "id": "P14", "text": "Consistency is a ranking and trust asset — every recurring fact must agree across all surfaces.", "weight": 1.0 },
+  { "id": "P15", "text": "Time events 6–8 weeks ahead — land listing changes early for reindex + AI-model incorporation.", "weight": 0.6 },
+  { "id": "P16", "text": "Worker ≠ checker — whoever writes copy never approves it; independent verification before advance.", "weight": 1.0 }
+]

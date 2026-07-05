@@ -1,0 +1,155 @@
+{
+  "disclaimer": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.",
+  "diseaseVerbs": ["treat", "cure", "prevent", "mitigate", "diagnose"],
+  "diseaseNounsBySubcategory": {
+    "probiotic": [
+      "irritable bowel syndrome",
+      "ibs",
+      "crohn",
+      "colitis",
+      "ulcerative colitis",
+      "celiac",
+      "diverticulitis",
+      "c diff",
+      "clostridium difficile"
+    ],
+    "joint": [
+      "arthritis",
+      "osteoarthritis",
+      "rheumatoid arthritis",
+      "gout",
+      "bursitis",
+      "tendinitis",
+      "fibromyalgia",
+      "lupus"
+    ],
+    "heart": [
+      "hypertension",
+      "high blood pressure",
+      "heart disease",
+      "coronary artery disease",
+      "atherosclerosis",
+      "stroke",
+      "hyperlipidemia",
+      "high cholesterol"
+    ],
+    "sleep": [
+      "insomnia",
+      "sleep apnea",
+      "narcolepsy",
+      "restless leg syndrome"
+    ],
+    "immunity": [
+      "covid",
+      "covid-19",
+      "influenza",
+      "flu",
+      "pneumonia",
+      "bronchitis",
+      "sinus infection",
+      "strep throat"
+    ],
+    "digestive": [
+      "gerd",
+      "acid reflux",
+      "heartburn",
+      "ulcer",
+      "peptic ulcer",
+      "gastritis",
+      "constipation",
+      "diarrhea"
+    ],
+    "womens": [
+      "menopause",
+      "pcos",
+      "polycystic ovary syndrome",
+      "endometriosis",
+      "pms",
+      "premenstrual syndrome",
+      "vaginal infection",
+      "yeast infection"
+    ],
+    "mens": [
+      "erectile dysfunction",
+      "bph",
+      "benign prostatic hyperplasia",
+      "prostate cancer",
+      "low testosterone",
+      "male infertility"
+    ],
+    "general": [
+      "diabetes",
+      "cancer",
+      "obesity",
+      "depression",
+      "anxiety",
+      "adhd",
+      "autism",
+      "alzheimer",
+      "dementia",
+      "epilepsy",
+      "migraine"
+    ]
+  },
+  "allergenRules": [
+    {
+      "class": "Tree Nuts",
+      "source": "almond",
+      "canonicalString": "Contains: Tree Nuts (almond)"
+    },
+    {
+      "class": "Tree Nuts",
+      "source": "walnut",
+      "canonicalString": "Contains: Tree Nuts (walnut)"
+    },
+    {
+      "class": "Peanuts",
+      "source": "peanut",
+      "canonicalString": "Contains: Peanuts"
+    },
+    {
+      "class": "Milk",
+      "source": "milk",
+      "canonicalString": "Contains: Milk"
+    },
+    {
+      "class": "Soy",
+      "source": "soy",
+      "canonicalString": "Contains: Soy"
+    },
+    {
+      "class": "Wheat",
+      "source": "wheat",
+      "canonicalString": "Contains: Wheat"
+    },
+    {
+      "class": "Eggs",
+      "source": "egg",
+      "canonicalString": "Contains: Eggs"
+    },
+    {
+      "class": "Fish",
+      "source": "fish",
+      "canonicalString": "Contains: Fish"
+    },
+    {
+      "class": "Shellfish",
+      "source": "shellfish",
+      "canonicalString": "Contains: Shellfish"
+    },
+    {
+      "class": "Sesame",
+      "source": "sesame",
+      "canonicalString": "Contains: Sesame"
+    }
+  ],
+  "superlativeBans": [
+    "#1",
+    "the only",
+    "best seller",
+    "maximum strength",
+    "clinically proven",
+    "fda approved"
+  ],
+  "fictionPhrases": []
+}
