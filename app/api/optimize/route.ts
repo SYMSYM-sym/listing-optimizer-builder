@@ -1,5 +1,9 @@
 import { NextResponse } from "next/server";
-import { optimize, type OptimizeProgress } from "@/lib/engine/optimize";
+import { buildAudit } from "@/lib/audit/buildAudit";
+import { detectCategory } from "@/lib/knowledge/detectCategory";
+import { loadPack } from "@/lib/knowledge/loadPack";
+import { optimizeWithRepair } from "@/lib/engine/repair";
+import type { OptimizeProgress } from "@/lib/engine/optimize";
 import type { KnowledgePackId, ListingSnapshot } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -33,23 +37,37 @@ export async function POST(request: Request) {
     );
   }
 
+  const snapshot = body.snapshot;
+  const detection = detectCategory(snapshot);
+  const packId = body.packId ?? detection.packId;
+  const pack = loadPack(packId);
   const wantsStream = request.headers.get("accept")?.includes("text/event-stream");
 
   if (wantsStream) {
     const encoder = new TextEncoder();
     const stream = new ReadableStream({
       async start(controller) {
-        const send = (payload: OptimizeProgress | { step: "done"; listing: unknown }) => {
+        const send = (
+          payload: OptimizeProgress | { step: "done"; optimized: unknown; audit: unknown },
+        ) => {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify(payload)}\n\n`));
         };
 
         try {
-          const listing = await optimize({
-            snapshot: body.snapshot!,
-            packId: body.packId,
+          const result = await optimizeWithRepair({
+            snapshot,
+            packId,
             onProgress: (event) => send(event),
           });
-          send({ step: "done", listing });
+          const audit = buildAudit({
+            current: snapshot,
+            proposed: result.listing,
+            pack,
+            subcategory: detection.subcategory,
+            productName: result.listing.title.split(/\s+/).slice(0, 2).join(" "),
+            gateResult: result.gateResult,
+          });
+          send({ step: "done", optimized: result.listing, audit });
           controller.close();
         } catch (error) {
           send({
@@ -72,11 +90,15 @@ export async function POST(request: Request) {
   }
 
   try {
-    const listing = await optimize({
-      snapshot: body.snapshot,
-      packId: body.packId,
+    const result = await optimizeWithRepair({ snapshot, packId });
+    const audit = buildAudit({
+      current: snapshot,
+      proposed: result.listing,
+      pack,
+      subcategory: detection.subcategory,
+      gateResult: result.gateResult,
     });
-    return NextResponse.json(listing);
+    return NextResponse.json({ optimized: result.listing, audit });
   } catch (error) {
     return NextResponse.json(
       {

@@ -177,12 +177,14 @@ export type Scorecard = {
   criteria: ScorecardCriterion[];
 };
 
+export type AuditGapSeverity = "P0" | "P1" | "P2";
+
 export type AuditGap = {
   field: string;
   current: string;
   proposed: string;
   why: string;
-  severity: "low" | "medium" | "high";
+  severity: AuditGapSeverity;
 };
 
 /**
