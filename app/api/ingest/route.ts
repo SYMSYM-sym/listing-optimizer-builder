@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import type { IngestProvider } from "@/lib/env";
 import { getIngestEnv } from "@/lib/env";
 import { getCachedSnapshot, setCachedSnapshot } from "@/lib/ingest/cache";
 import { rawListingFromPaste } from "@/lib/ingest/paste";
@@ -18,7 +19,15 @@ type IngestRequestBody = {
   url?: string;
   html?: string;
   fields?: PasteInput["fields"];
+  provider?: IngestProvider;
 };
+
+function resolveProvider(requested: IngestProvider | undefined, fallback: IngestProvider): IngestProvider {
+  if (requested && ["rainforest", "firecrawl", "paste"].includes(requested)) {
+    return requested;
+  }
+  return fallback;
+}
 
 function errorStatus(code: IngestErrorResponse["error"]): number {
   switch (code) {
@@ -77,31 +86,32 @@ export async function POST(request: Request) {
 
   try {
     const env = getIngestEnv();
+    const provider = resolveProvider(body.provider, env.ingestProvider);
 
-    const cached = getCachedSnapshot(asin, env.ingestProvider);
+    const cached = getCachedSnapshot(asin, provider);
     if (cached) {
       return NextResponse.json(cached);
     }
 
     let raw;
-    if (env.ingestProvider === "paste") {
+    if (provider === "paste") {
       raw = rawListingFromPaste(asin, {
         html: body.html,
         fields: body.fields,
       });
     } else {
-      const provider = createListingProvider(env.ingestProvider, env);
-      if (!provider) {
+      const listingProvider = createListingProvider(provider, env);
+      if (!listingProvider) {
         return jsonError(
           "PROVIDER_ERROR",
-          `No provider configured for ${env.ingestProvider}.`,
+          `No provider configured for ${provider}.`,
         );
       }
-      raw = await provider.fetch(asin);
+      raw = await listingProvider.fetch(asin);
     }
 
     const snapshot = toSnapshot(raw);
-    setCachedSnapshot(asin, snapshot, env.ingestProvider);
+    setCachedSnapshot(asin, snapshot, provider);
     return NextResponse.json(snapshot);
   } catch (error) {
     if (error instanceof IngestError) {

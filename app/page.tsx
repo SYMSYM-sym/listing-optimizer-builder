@@ -1,5 +1,5 @@
-import { UrlOptimizerForm } from "./components/UrlOptimizerForm";
+import { Dashboard } from "@/app/components/dashboard/Dashboard";
 
 export default function HomePage() {
-  return <UrlOptimizerForm />;
+  return <Dashboard />;
 }
